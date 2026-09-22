@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fetchpoint — Bot Console</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="rail">
+    <div class="brand"><span class="mark">▤</span><span class="name">Fetchpoint</span></div>
+    <nav class="nav" id="nav">
+      <button data-view="overview" class="active">Overview</button>
+      <button data-view="queue">Queue <span class="count" id="navQueueCount"></span></button>
+      <button data-view="users">Users</button>
+      <button data-view="settings">Settings</button>
+    </nav>
+    <div class="rail-foot"><span class="dot"></span>Bot online — polling every 3s</div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h1 id="viewTitle">Overview</h1>
+        <p id="viewSub">Last 24 hours of activity across your video-download bot</p>
+      </div>
+      <button class="theme-toggle" id="themeToggle">theme: system</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <section class="view active" id="view-overview">
+      <div class="hero">
+        <div>
+          <div class="big" id="heroCount">0</div>
+          <div class="big-label">videos fetched today</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><div class="v up">98.4%</div><div class="l">success rate</div></div>
+          <div class="stat"><div class="v">6.1s</div><div class="l">median fetch time</div></div>
+          <div class="stat"><div class="v">312</div><div class="l">active users (7d)</div></div>
+          <div class="stat"><div class="v warn">14</div><div class="l">failed — link unsupported</div></div>
+        </div>
+      </div>
+
+      <section class="block">
+        <div class="block-head"><h2>Live pipeline</h2><span class="sub">most recent jobs, newest first</span></div>
+        <div class="pipeline" id="pipelineStrip"></div>
+      </section>
+
+      <section class="block">
+        <div class="block-head"><h2>Downloads by platform</h2><span class="sub">last 7 days</span></div>
+        <div class="bars" id="platformBars"></div>
+      </section>
+    </section>
+
+    <!-- QUEUE -->
+    <section class="view" id="view-queue">
+      <div class="block-head">
+        <h2>All jobs</h2>
+        <div class="filters" id="statusFilters">
+          <button data-status="all" class="active">all</button>
+          <button data-status="done">done</button>
+          <button data-status="proc">processing</button>
+          <button data-status="fail">failed</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Job</th><th>User</th><th>Platform</th><th>Link</th><th>Size</th><th>Time</th><th>Status</th>
+          </tr></thead>
+          <tbody id="queueBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- USERS -->
+    <section class="view" id="view-users">
+      <div class="block-head"><h2>Users</h2><span class="sub" id="userSub"></span></div>
+      <div class="user-grid" id="userGrid"></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="view" id="view-settings">
+      <div class="block-head"><h2>Bot settings</h2><span class="sub">changes apply on next restart</span></div>
+      <div class="settings-grid">
+        <div class="field-card">
+          <h3>Allowed sources</h3>
+          <p>Platforms the bot will accept links from.</p>
+          <div id="platformToggles"></div>
+        </div>
+        <div class="field-card">
+          <h3>Limits</h3>
+          <p>Guardrails on file size and request rate.</p>
+          <label class="small">Max file size (MB)</label>
+          <input type="text" value="500">
+          <label class="small">Max requests per user / hour</label>
+          <input type="text" value="20">
+          <label class="small">Bot token</label>
+          <input type="text" value="•••••••••••••••••••••4f2A">
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/render.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
